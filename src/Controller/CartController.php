@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
 use App\Entity\Invoice;
 use App\Entity\InvoiceLine;
+use App\Entity\User;
 
 
 /**

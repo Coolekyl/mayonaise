@@ -15,7 +15,6 @@
         {% if product %}
 
             <div class="row">
-                <div class="col-md-6">
                     <table class="table table-responsive">
                         <thead>
                         <tr>
@@ -25,6 +24,7 @@
                             <th>Price</th>
                             <th>Total</th>
                             <th>Delete</th>
+                            <th>back</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,13 +44,13 @@
                                 {% endfor %}
 
                                 <td><a href="{{ path('cart_remove', {'id': key}) }}"><button class="btn btn-danger">Remove</button></a></td>
+                                <td><a href="{{ path('product_index', {'id': key}) }}"><button class="btn btn-success">back to shopping</button></a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
 
                 </div>
-            </div>
 
         {% endif %}
     </ul>
