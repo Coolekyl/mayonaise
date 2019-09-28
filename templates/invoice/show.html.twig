@@ -15,6 +15,41 @@
                 <th>Date</th>
                 <td>{{ invoice.date ? invoice.date|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>lines</th>
+                {#{% if(invoice.invoicelines is not empty) %}
+                {% for line in invoice.invoicelines %}
+            </tr>
+            <tr>
+                <td>{{ line.amount }}</td>
+            </tr>
+            <tr>
+                <td>{{ line.productid }}<a href="{{ path('product_show', {'id': line.productid}) }}">show</a></td>
+                {% endfor %}
+                {% else %}
+                    <td>this invoice does not have any lines in it, how strange?</td>
+            {% endif %}#}
+            </tr>
+
+            {% set gentot = 0 %}
+            {% for line in invoice.invoicelines %}
+                <tr>
+                    <td>{{ line.amount }}</td>
+                    {% set total = line.amount %}
+                    <td>{{ line.productId }}</td>
+                    <td>
+                        {% for product in line.productid %}
+                            {% set p = line.productId %}
+                            {% if p.id == product.id %}
+                                {{ product.price|number_format(2) }}
+                                {% set total = (total * product.price) %}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ total|number_format(2) }}</td>
+                    {% set gentot = (gentot + total) %}
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

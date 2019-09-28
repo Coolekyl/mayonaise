@@ -3,42 +3,61 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
-    <h1>Product index</h1>
+    <h1>Products</h1>
 
-    <table class="table">
+        <div class="row">
+
+    {% for product in products %}
+
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img src="127.0.0.1:8000/public/media/zaanse_mayo.png"
+                     style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>TaxCode</th>
-                <th>Price</th>
-                <th>Img</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>TaxCode</th>
+            <th>Price</th>
+            <th>Img</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.taxCode }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.img }}</td>
-                <td>
-                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
-                    <a href="{{ path('cart_add', {'id': product.id}) }}">add to cart</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.taxCode }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.img }}</td>
+            <td>
+                <a href="{{ path('cart_add', {'id': product.id}) }}">add to cart</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">no records found</td>
+        </tr></tbody>
+        </table>
+    {% endfor %}
+        </div>
+
 
     <a href="{{ path('product_new') }}">Create new</a>
 {% endblock %}
